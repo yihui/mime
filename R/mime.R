@@ -7,6 +7,7 @@
 #' scripts (\file{.R}).
 #' @docType data
 #' @name mimemap
+#' @source The file \file{/etc/mime.types} on Debian.
 #' @examples str(as.list(mimemap))
 #' mimemap['pdf']
 #' mimemap[c('html', 'js', 'css')]
