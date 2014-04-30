@@ -16,7 +16,7 @@
 local({
 
   # run the code here only during roxygenize(), when the working dir is mime/R/
-  if (!file_test('-d', '../data')) return()
+  if (basename(getwd()) != 'R' || !file_test('-d', '../data')) return()
   # do nothing if we are not under *nix; could read Windows registry, but who cares...
   if (!file.exists(mimefile <- '/etc/mime.types')) return()
 
