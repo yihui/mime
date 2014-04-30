@@ -15,6 +15,8 @@
 #' mime:::mimeextra
 local({
 
+  # the code is executed only when called from Rd2roxygen
+  if (!('Rd2roxygen' %in% loadedNamespaces())) return()
   # run the code here only during roxygenize(), when the working dir is mime/R/
   if (basename(getwd()) != 'R' || !file_test('-d', '../data')) return()
   # do nothing if we are not under *nix; could read Windows registry, but who cares...
