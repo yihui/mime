@@ -14,8 +14,12 @@ guess_type(c('a/b/c.html', 'd.pdf', 'e.odt', 'foo.docx', 'tex'))
 # [5] "text/x-tex"
 ```
 
-The package is not on CRAN yet. For now, you can install from RForge:
+You can install the stable version from CRAN, or the development version from
+RForge:
 
 ```s
+# CRAN version
+install.packages('mime', repos = 'http://cran.rstudio.com')
+# development version
 install.packages('mime', repos = 'http://rforge.net')
 ```
