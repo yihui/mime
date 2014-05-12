@@ -1,0 +1,13 @@
+		 CHANGES IN mime VERSION 0.1.1
+
+BUG FIXES
+
+  o mime::guess_type() may not work when mime is loaded but not attached,
+  because R does not load the mimemap data in this case. Now mimemap is exported
+  in the package namespace.
+
+		 CHANGES IN mime VERSION 0.1
+
+NEW FEATURES
+
+  o The initial version of mime. The main function is mime::guess_type().
