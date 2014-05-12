@@ -8,6 +8,7 @@
 #' @docType data
 #' @name mimemap
 #' @source The file \file{/etc/mime.types} on Debian.
+#' @export
 #' @examples str(as.list(mimemap))
 #' mimemap['pdf']
 #' mimemap[c('html', 'js', 'css')]
@@ -18,7 +19,7 @@ local({
   # the code is executed only when called from Rd2roxygen
   if (!('Rd2roxygen' %in% loadedNamespaces())) return()
   # run the code here only during roxygenize(), when the working dir is mime/R/
-  if (basename(getwd()) != 'R' || !file_test('-d', '../data')) return()
+  if (basename(getwd()) != 'R') return()
   # do nothing if we are not under *nix; could read Windows registry, but who cares...
   if (!file.exists(mimefile <- '/etc/mime.types')) return()
 
@@ -46,7 +47,7 @@ local({
       lines
     ), collapse = ',\n'),
     ')'
-  ), con = '../data/mimemap.R')
+  ), con = 'mimemap.R')
 
 })
 
