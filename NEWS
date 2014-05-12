@@ -1,3 +1,10 @@
+		 CHANGES IN mime VERSION 0.1.2
+
+BUG FIXES
+
+  o guess_type() returned wrong values for filenames without extensions: it
+  should have used the 'empty' argument.
+
 		 CHANGES IN mime VERSION 0.1.1
 
 BUG FIXES

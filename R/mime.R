@@ -104,7 +104,7 @@ guess_type = function(file, unknown = 'application/octet-stream',
                       empty = 'text/plain', mime_extra = mimeextra, subtype = '') {
   file = basename(file)
   # only need 'bar' from 'foo.bar'
-  if (length(i <- grep('[.]', file))) file[i] = tools::file_ext(file[i])
+  file = tools::file_ext(file)
   type = unname(c(mime_extra, mimemap)[tolower(file)])
   type[file == ''] = empty
   type[is.na(type)] = unknown  # unknown file extensions
