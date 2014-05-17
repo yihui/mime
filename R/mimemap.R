@@ -1,4 +1,4 @@
-mimemap <- c(
+mimemap = c(
 ez = "application/andrew-inset",
 anx = "application/annodex",
 atom = "application/atom+xml",

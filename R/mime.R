@@ -39,7 +39,7 @@ local({
   # write R source code to the data directory; "hand-writing" instead dump(), to
   # make sure we can easily catch possible future differences in version control
   writeLines(c(
-    'mimemap <- c(',
+    'mimemap = c(',
     paste(sprintf(
       '%s = "%s"',
       # invalid names should be quoted using ``
