@@ -22,6 +22,7 @@ local({
   if (basename(getwd()) != 'R') return()
   # do nothing if we are not under *nix; could read Windows registry, but who cares...
   if (!file.exists(mimefile <- '/etc/mime.types')) return()
+  message('* Updating mimemap.R')
 
   lines = readLines(mimefile, warn = FALSE)
   # remove comments and blank lines
