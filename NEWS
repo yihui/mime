@@ -1,3 +1,10 @@
+		 CHANGES IN mime VERSION 0.2
+
+NEW FEATURES
+
+  o added a function parse_multipart() to parse multipart form data submited via
+  HTTP POST
+
 		 CHANGES IN mime VERSION 0.1.2
 
 BUG FIXES
