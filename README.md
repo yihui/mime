@@ -1,5 +1,7 @@
 # mime
 
+[![Build Status](https://travis-ci.org/yihui/mime.svg)](https://travis-ci.org/yihui/mime)
+
 This is an R package for mapping filename extensions to [MIME
 types](http://en.wikipedia.org/wiki/Internet_media_type), based on the data
 [derived](R/mime.R) from `/etc/mime.types`.
