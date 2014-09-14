@@ -1,2 +1,4 @@
 export(guess_type)
 export(mimemap)
+export(parse_multipart)
+useDynLib(mime)
