@@ -59,7 +59,9 @@ mimeextra = c(
   md = "text/x-markdown",
   markdown = "text/x-markdown",
   r = "text/plain",
-  rd = "text/plain"
+  rd = "text/plain",
+  rmd = "text/x-markdown",
+  NULL
 )
 
 
