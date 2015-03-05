@@ -1,3 +1,4 @@
+% Please edit documentation in R/mime.R
 \docType{data}
 \name{mimemap}
 \alias{mimeextra}

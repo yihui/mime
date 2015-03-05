@@ -1,3 +1,4 @@
+% Please edit documentation in R/mime.R
 \name{guess_type}
 \alias{guess_type}
 \title{Guess the MIME types from filenames}
