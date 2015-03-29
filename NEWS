@@ -2,7 +2,7 @@
 
 NEW FEATURES
 
-  o added a function parse_multipart() to parse multipart form data submited via
+  o added a function parse_multipart() to parse multipart form data submitted via
   HTTP POST
 
 		 CHANGES IN mime VERSION 0.1.2
