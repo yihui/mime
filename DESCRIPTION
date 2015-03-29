@@ -1,13 +1,13 @@
 Package: mime
 Type: Package
-Title: Map filenames to MIME types
+Title: Map Filenames to MIME Types
 Version: 0.2.2
 Date: 2014-09-27
 Authors@R: c(person("Jeffrey", "Horner", role = "ctb"),
     person("Yihui", "Xie", role = c("aut", "cre"), email = "xie@yihui.name"))
 Maintainer: Yihui Xie <xie@yihui.name>
-Description: This package guesses the MIME type from a filename extension using
-    the data derived from /etc/mime.types in UNIX-type systems.
+Description: Guesses the MIME type from a filename extension using the data
+    derived from /etc/mime.types in UNIX-type systems.
 Imports:
     tools
 License: GPL-2
