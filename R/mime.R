@@ -118,3 +118,10 @@ guess_type = function(file, unknown = 'application/octet-stream',
   }
   type
 }
+
+if (.Platform$OS.type == 'windows') basename = function(path) {
+  if (length(path) == 0) return(path)
+  tryCatch(base::basename(path), error = function(e) {
+    vapply(strsplit(path, '[\\/]+'), tail, character(1), 1, USE.NAMES = FALSE)
+  })
+}

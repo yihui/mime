@@ -1,3 +1,9 @@
+		 CHANGES IN mime VERSION 0.3.1
+
+BUG FIXES
+
+  o guess_type() may fail on Windows when the file paths are too long (#2)
+
 		 CHANGES IN mime VERSION 0.3
 
 NEW FEATURES
