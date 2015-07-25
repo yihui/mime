@@ -1,3 +1,9 @@
+		 CHANGES IN mime VERSION 0.3.2
+
+NEW FEATURES
+
+  o added a new content type: geojson
+
 		 CHANGES IN mime VERSION 0.3.1
 
 BUG FIXES
