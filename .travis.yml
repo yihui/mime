@@ -1,14 +1,29 @@
 language: c
 
+sudo: false
+
 env:
-  - R_PKG="$(basename $TRAVIS_REPO_SLUG)"
+  matrix:
+    - R_PKG="$(basename $TRAVIS_REPO_SLUG)"
+  global:
+    secure: "PnEaPNBMnJB64cDOB2GuDM+njvobATpDgKbv3Zczp88FMHcXcw/csgPQPbJWrcOPFAAPZ6ptpg5mWGrEi79ZeZE33gSSxw5G+QlXqd13DsMXJLzXBKeuJfjpr4choDITO7jPg+NkkWstaZh0hzqioTZCb2Wq/zhBqO03jFmZWMY="
+
+addons:
+  apt:
+    sources:
+    - r-packages-precise
+    packages:
+    - r-base-dev
+    - r-recommended
 
 install:
-  - sudo apt-add-repository -y "deb http://cran.rstudio.com/bin/linux/ubuntu `lsb_release -cs`/"
-  - sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
-  - sudo apt-get update -qq
-  - sudo apt-get install -qq r-base-core
   - "wget -q -O - http://yihui.name/xran/r-config | bash"
+  - Rscript -e "if (!require('devtools')) install.packages('devtools')"
+  - Rscript -e "devtools::install_deps(dep = TRUE)"
+
+cache:
+  directories:
+  - $HOME/R
 
 script:
   - cd ..; rm -f *.tar.gz; R CMD build $R_PKG
@@ -19,6 +34,3 @@ script:
 after_success:
   - set -e
   - "(wget -q -O - http://yihui.name/xran/r-xran | bash)"
-
-after_failure:
-  - cd ..; for i in `ls *.Rcheck/00*`; do cat $i; done
