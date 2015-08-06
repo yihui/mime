@@ -1,4 +1,9 @@
-		 CHANGES IN mime VERSION 0.3.1
+		 CHANGES IN mime VERSION 0.3.2
+
+NEW FEATURES
+
+  o added a new content type: .geojson -> application/vnd.geo+json (thanks,
+  @dmpe, #3)
 
 BUG FIXES
 
