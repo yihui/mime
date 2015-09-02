@@ -23,5 +23,5 @@ RForge:
 # CRAN version
 install.packages('mime', repos = 'http://cran.rstudio.com')
 # development version
-install.packages('mime', repos = 'http://rforge.net')
+install.packages('mime', repos = 'http://yihui.name/xran')
 ```
