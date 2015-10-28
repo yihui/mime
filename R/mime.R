@@ -1,3 +1,6 @@
+#' @import utils
+NULL
+
 #' Tables for mapping filename extensions to MIME types
 #'
 #' The data \code{mimemap} is a named character vector that stores the filename
