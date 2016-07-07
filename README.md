@@ -17,11 +17,11 @@ guess_type(c('a/b/c.html', 'd.pdf', 'e.odt', 'foo.docx', 'tex'))
 ```
 
 You can install the stable version from CRAN, or the development version from
-RForge:
+XRAN:
 
 ```r
 # CRAN version
-install.packages('mime', repos = 'http://cran.rstudio.com')
+install.packages('mime', repos = 'https://cran.rstudio.com')
 # development version
 install.packages('mime', repos = 'http://yihui.name/xran')
 ```
