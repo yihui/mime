@@ -1,36 +1,17 @@
-language: c
-
+language: r
 sudo: false
+cache: packages
 
 env:
-  matrix:
-    - R_PKG="$(basename $TRAVIS_REPO_SLUG)"
   global:
-    secure: "PnEaPNBMnJB64cDOB2GuDM+njvobATpDgKbv3Zczp88FMHcXcw/csgPQPbJWrcOPFAAPZ6ptpg5mWGrEi79ZeZE33gSSxw5G+QlXqd13DsMXJLzXBKeuJfjpr4choDITO7jPg+NkkWstaZh0hzqioTZCb2Wq/zhBqO03jFmZWMY="
+    - R_PKG="$(basename $TRAVIS_REPO_SLUG)"
+    - secure: PnEaPNBMnJB64cDOB2GuDM+njvobATpDgKbv3Zczp88FMHcXcw/csgPQPbJWrcOPFAAPZ6ptpg5mWGrEi79ZeZE33gSSxw5G+QlXqd13DsMXJLzXBKeuJfjpr4choDITO7jPg+NkkWstaZh0hzqioTZCb2Wq/zhBqO03jFmZWMY=
 
-addons:
-  apt:
-    sources:
-    - r-packages-precise
-    packages:
-    - r-base-dev
-    - r-recommended
+repos:
+  XRAN: http://yihui.name/xran
 
-install:
-  - "wget -q -O - http://yihui.name/xran/r-config | bash"
-  - Rscript -e "if (!require('devtools')) install.packages('devtools')"
-  - Rscript -e "devtools::install_deps(dep = TRUE)"
+before_install:
+  - "wget -q http://yihui.name/xran/.gitconfig -O ~/.gitconfig"
 
-cache:
-  directories:
-  - $HOME/R
-
-script:
-  - cd ..; rm -f *.tar.gz; R CMD build $R_PKG
-  - R CMD check ${R_PKG}_*.tar.gz --no-manual
-  - cd $R_PKG
-
-# deploy to XRAN
 after_success:
-  - set -e
   - "(wget -q -O - http://yihui.name/xran/r-xran | bash)"
