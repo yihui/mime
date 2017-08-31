@@ -1,9 +1,10 @@
 #include <R.h>
 #include <Rinternals.h>
+#include <stdlib.h>
 #include <R_ext/Rdynload.h>
 
-SEXP rawmatch (SEXP needle, SEXP haystack);
-static R_CallMethodDef callMethods[]  = {
+extern SEXP rawmatch (SEXP needle, SEXP haystack);
+static const R_CallMethodDef callMethods[]  = {
   {"rawmatch", (DL_FUNC) &rawmatch, 2},
   {NULL, NULL, 0}
 };
