@@ -1,6 +1,5 @@
 #include <R.h>
 #include <Rinternals.h>
-#include <stdlib.h>
 #include <R_ext/Rdynload.h>
 
 SEXP rawmatch (SEXP needle, SEXP haystack);
