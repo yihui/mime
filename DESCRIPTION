@@ -1,11 +1,13 @@
 Package: mime
 Type: Package
 Title: Map Filenames to MIME Types
-Version: 0.5
+Version: 0.5.1
 Date: 2016-07-07
-Authors@R: c(person("Jeffrey", "Horner", role = "ctb"),
-    person("Yihui", "Xie", role = c("aut", "cre"), email = "xie@yihui.name"))
-Maintainer: Yihui Xie <xie@yihui.name>
+Authors@R: c(
+    person("Yihui", "Xie", role = c("aut", "cre"), email = "xie@yihui.name"),
+    person("Jeffrey", "Horner", role = "ctb"),
+    person("Beilei", "Bian", role = "ctb")
+    )
 Description: Guesses the MIME type from a filename extension using the data
     derived from /etc/mime.types in UNIX-type systems.
 Imports:
