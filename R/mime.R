@@ -62,6 +62,9 @@ mimeextra = c(
   r = "text/plain",
   rd = "text/plain",
   rmd = "text/x-markdown",
+  rnw = "text/x-sweave",
+  rproj = "text/rstudio",
+  yml = "text/yaml",
   NULL
 )
 
