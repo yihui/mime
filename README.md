@@ -8,7 +8,7 @@ types](http://en.wikipedia.org/wiki/Internet_media_type), based on the data
 
 ```r
 # installation
-install.packages('mime', repos = 'https://cran.rstudio.com')
+install.packages('mime')
 
 library(mime)
 guess_type(c('a/b/c.html', 'd.pdf', 'e.odt', 'foo.docx', 'tex'))
