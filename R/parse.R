@@ -18,7 +18,7 @@
 #' @references This function was borrowed from
 #'   \url{https://github.com/jeffreyhorner/Rook/} with slight modifications.
 #' @export
-#' @useDynLib mime
+#' @useDynLib mime, .registration = TRUE
 parse_multipart = function(env) {
   ctype = env$CONTENT_TYPE
   if (length(grep('^multipart', ctype)) == 0L) return()

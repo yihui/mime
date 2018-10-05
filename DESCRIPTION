@@ -1,8 +1,7 @@
 Package: mime
 Type: Package
 Title: Map Filenames to MIME Types
-Version: 0.5.1
-Date: 2016-07-07
+Version: 0.5.2
 Authors@R: c(
     person("Yihui", "Xie", role = c("aut", "cre"), email = "xie@yihui.name"),
     person("Jeffrey", "Horner", role = "ctb"),
@@ -16,4 +15,5 @@ License: GPL
 URL: https://github.com/yihui/mime
 BugReports: https://github.com/yihui/mime/issues
 LazyData: TRUE
-RoxygenNote: 5.0.1
+RoxygenNote: 6.1.0
+Encoding: UTF-8
