@@ -21,11 +21,10 @@ local({
 
   # the code is executed only when called from Rd2roxygen
   if (!('Rd2roxygen' %in% loadedNamespaces())) return()
-  # run the code here only during roxygenize(), when the working dir is mime/R/
-  if (basename(getwd()) != 'R') return()
+  if (file.access('R/mimemap.R', 2) != 0) return()
   # do nothing if we are not under *nix; could read Windows registry, but who cares...
   if (!file.exists(mimefile <- '/etc/mime.types')) return()
-  message('* Updating mimemap.R')
+  message('* Updating R/mimemap.R')
 
   lines = readLines(mimefile, warn = FALSE)
   # remove comments and blank lines
@@ -51,7 +50,7 @@ local({
       lines
     ), collapse = ',\n'),
     ')'
-  ), con = 'mimemap.R')
+  ), con = 'R/mimemap.R')
 
 })
 
