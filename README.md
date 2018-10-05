@@ -7,6 +7,9 @@ types](http://en.wikipedia.org/wiki/Internet_media_type), based on the data
 [derived](R/mime.R) from `/etc/mime.types`.
 
 ```r
+# installation
+install.packages('mime', repos = 'https://cran.rstudio.com')
+
 library(mime)
 guess_type(c('a/b/c.html', 'd.pdf', 'e.odt', 'foo.docx', 'tex'))
 # [1] "text/html"                                                              
@@ -14,14 +17,4 @@ guess_type(c('a/b/c.html', 'd.pdf', 'e.odt', 'foo.docx', 'tex'))
 # [3] "application/vnd.oasis.opendocument.text"                                
 # [4] "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
 # [5] "text/x-tex"
-```
-
-You can install the stable version from CRAN, or the development version from
-XRAN:
-
-```r
-# CRAN version
-install.packages('mime', repos = 'https://cran.rstudio.com')
-# development version
-install.packages('mime', repos = 'http://yihui.name/xran')
 ```
