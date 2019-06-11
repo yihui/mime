@@ -1,6 +1,7 @@
 # mime
 
 [![Build Status](https://travis-ci.org/yihui/mime.svg)](https://travis-ci.org/yihui/mime)
+[![Downloads from the RStudio CRAN mirror](https://cranlogs.r-pkg.org/badges/mime)](https://cran.r-project.org/package=mime)
 
 This is an R package for mapping filename extensions to [MIME
 types](http://en.wikipedia.org/wiki/Internet_media_type), based on the data
