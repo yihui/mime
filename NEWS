@@ -1,6 +1,8 @@
 		 CHANGES IN mime VERSION 0.8
 
+MINOR CHANGES
 
+  o Added the MIME type for .scss files (thanks, @cpsievert, #10).
 
 		 CHANGES IN mime VERSION 0.7
 
