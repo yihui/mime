@@ -4,8 +4,13 @@
 \alias{guess_type}
 \title{Guess the MIME types from filenames}
 \usage{
-guess_type(file, unknown = "application/octet-stream", empty = "text/plain", 
-    mime_extra = mimeextra, subtype = "")
+guess_type(
+  file,
+  unknown = "application/octet-stream",
+  empty = "text/plain",
+  mime_extra = mimeextra,
+  subtype = ""
+)
 }
 \arguments{
 \item{file}{a character vector of filenames, or filename extensions}

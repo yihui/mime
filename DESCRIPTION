@@ -15,5 +15,5 @@ License: GPL
 URL: https://github.com/yihui/mime
 BugReports: https://github.com/yihui/mime/issues
 LazyData: TRUE
-RoxygenNote: 6.1.0
+RoxygenNote: 7.0.2
 Encoding: UTF-8
