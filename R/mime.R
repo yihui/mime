@@ -59,6 +59,7 @@ local({
 #' @format NULL
 mimeextra = c(
   geojson = "application/vnd.geo+json",
+  jsonp = "application/javascript",
   r = "text/plain",
   rd = "text/plain",
   rmd = "text/x-markdown",
