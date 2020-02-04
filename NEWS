@@ -1,6 +1,8 @@
 		 CHANGES IN mime VERSION 0.9
 
+MINOR CHANGES
 
+  o Added the MIME type for .jsonp files (thanks, @clabornd, #11).
 
 		 CHANGES IN mime VERSION 0.8
 
