@@ -1,5 +1,8 @@
 		 CHANGES IN mime VERSION 0.10
 
+MAJOR CHANGES
+
+  o Removed the function `parse_multipart()`, which was originally introduced only to support the IE8/9 file upload in Shiny. The corresponding C code was also removed, and the package is more lightweight consisting of pure R code now (#12).
 
 		 CHANGES IN mime VERSION 0.9
 
