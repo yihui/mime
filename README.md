@@ -2,7 +2,7 @@
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/yihui/mime/workflows/R-CMD-check/badge.svg)](https://github.com/yihui/mime/actions)
-[![Downloads from the RStudio CRAN mirror](https://cranlogs.r-pkg.org/badges/mime)](https://cran.r-project.org/package=mime)
+[![CRAN release](https://www.r-pkg.org/badges/version/mime)](https://cran.r-project.org/package=mime)
 <!-- badges: end -->
 
 This is an R package for mapping filename extensions to [MIME
