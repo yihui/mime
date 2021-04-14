@@ -14,6 +14,5 @@ Imports:
 License: GPL
 URL: https://github.com/yihui/mime
 BugReports: https://github.com/yihui/mime/issues
-LazyData: TRUE
 RoxygenNote: 7.1.1
 Encoding: UTF-8
