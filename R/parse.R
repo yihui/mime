@@ -67,7 +67,7 @@ parse_multipart = function(env) {
   # the remaining [+++]
   slice_buffer = function(i, size) {
     slice = buf$read_buffer[if (i > 1) 1:(i - 1) else 1]
-    buf$read_buffer = if (size < buf$read_buffer_len)
+    buf$read_buffer = if ((i+size) <= buf$read_buffer_len)
       buf$read_buffer[(i + size):buf$read_buffer_len] else raw()
     buf$read_buffer_len = length(buf$read_buffer)
     slice
