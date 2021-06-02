@@ -14,7 +14,7 @@ SEXP rawmatch(SEXP needle, SEXP haystack) {
 
   ans = allocVector(INTSXP, 1);
 
-  for (i = 0; i < n2; i++) {
+  for (i = 0; i <= (n2 - n1); i++) {
     if (x2[i] == x1[0]) {
       for (j = 0; j < n1; j++) {
         if (x2[i + j] != x1[j]) break;
