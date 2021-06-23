@@ -1,3 +1,7 @@
+# CHANGES IN mime VERSION 0.11
+
+- Removed the unused `LazyData` field in `DESCRIPTION`.
+
 # CHANGES IN mime VERSION 0.10
 
 - Add mimetype for OGC GeoPackage (.gpkg extension) (thanks, @eblondel, #14).
