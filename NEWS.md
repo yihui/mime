@@ -1,3 +1,7 @@
+# CHANGES IN mime VERSION 0.12
+
+- Fixed bugs #15 and #16 in `parse_multipart()` (thanks, @michalkouril).
+
 # CHANGES IN mime VERSION 0.11
 
 - Removed the unused `LazyData` field in `DESCRIPTION`.
