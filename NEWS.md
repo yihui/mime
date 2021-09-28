@@ -1,3 +1,6 @@
+# CHANGES IN mime VERSION 0.13
+
+
 # CHANGES IN mime VERSION 0.12
 
 - Fixed bugs #15 and #16 in `parse_multipart()` (thanks, @michalkouril).
