@@ -2,7 +2,6 @@ on:
   push:
     branches:
       - main
-      - master
   pull_request:
     branches:
       - main
@@ -17,3 +16,10 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v2
+      - run: |
+          echo "Hello world!" > generated.txt
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "generated"
+          git push
