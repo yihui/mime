@@ -15,14 +15,14 @@ lines = lines[!duplicated(names(lines))]
 # write R source code to the data directory; "hand-writing" instead dump(), to
 # make sure we can easily catch possible future differences in version control
 dump_vec = function(name, x) {
-  nm = names(x)
+  nm = sort(names(x))
   writeLines(c(
     sprintf('%s = c(', name),
     paste(sprintf(
       '%s = "%s"',
       # invalid names should be quoted using ``
       ifelse(make.names(nm) == nm, nm, sprintf('`%s`', nm)),
-      x
+      x[nm]
     ), collapse = ',\n'),
     ')'
   ), sprintf('R/%s.R', name))
