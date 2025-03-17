@@ -44,10 +44,10 @@ NULL
 #'
 #' # override the standard MIME table (tex is text/x-tex by default)
 #' guess_type('tex', mime_extra = c(tex = 'text/plain'))
-#' # unknown extension 'bar'
-#' guess_type('foo.bar')
+#' # unknown extension 'zzz'
+#' guess_type('foo.zzz')
 #' # force unknown types to be plain text
-#' guess_type('foo.bar', unknown = 'text/plain')
+#' guess_type('foo.zzz', unknown = 'text/plain')
 #'
 #' # empty file extension
 #' guess_type('Makefile')
