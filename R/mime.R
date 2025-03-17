@@ -59,6 +59,9 @@ NULL
 #' @export
 guess_type = function(file, unknown = 'application/octet-stream',
                       empty = 'text/plain', mime_extra = mimeextra, subtype = '') {
+  # TODO: remove this workaround
+  if ('RestRserve' %in% loadedNamespaces() && packageVersion('RestRserve') <= '1.2.4')
+    mimemap['js'] = 'text/javascript'
   file = basename(file)
   # only need 'bar' from 'foo.bar'
   file = tools::file_ext(file)

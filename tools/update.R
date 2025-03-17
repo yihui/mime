@@ -16,6 +16,10 @@ lines = lines[!duplicated(names(lines))]
 # make sure we can easily catch possible future differences in version control
 dump_vec = function(name, x) {
   nm = sort(names(x))
+  # TODO: remove special treatment for jpeg https://github.com/posit-dev/connectapi/issues/382
+  j = names(which(x == 'image/jpeg'))
+  i = nm %in% j
+  nm[i] = c(intersect(j, 'jpeg'), setdiff(j, 'jpeg'))
   writeLines(c(
     sprintf('%s = c(', name),
     paste(sprintf(
