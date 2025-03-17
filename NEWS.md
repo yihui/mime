@@ -1,5 +1,6 @@
 # CHANGES IN mime VERSION 0.13
 
+- Synced the MIME types from the latest version of Ubuntu, so that `.wasm` files can be recognized (thanks, @wch, #22).
 
 # CHANGES IN mime VERSION 0.12
 
