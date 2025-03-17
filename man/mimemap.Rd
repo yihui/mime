@@ -5,14 +5,13 @@
 \alias{mimemap}
 \title{Tables for mapping filename extensions to MIME types}
 \source{
-The file \file{/etc/mime.types} on Debian.
+The file \verb{/etc/mime.types} on Debian.
 }
 \description{
 The data \code{mimemap} is a named character vector that stores the filename
-extensions and the corresponding MIME types, e.g. \code{c(html = 'text/html',
-pdf = 'application/pdf', ...)}. The character vector \code{mime:::mimeextra} stores
-some additional types that we know, such as Markdown files (\file{.md}), or R
-scripts (\file{.R}).
+extensions and the corresponding MIME types, e.g. \code{c(html = 'text/html', pdf = 'application/pdf', ...)}. The character vector \code{mime:::mimeextra} stores
+some additional types that we know, such as Markdown files (\code{.md}), or R
+scripts (\code{.R}).
 }
 \examples{
 str(as.list(mimemap))

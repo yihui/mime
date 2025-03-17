@@ -20,18 +20,17 @@ in the table}
 
 \item{empty}{the MIME type for files that do not have extensions}
 
-\item{mime_extra}{a named character vector of the form \code{c(extension =
-type)} providing extra MIME types (by default, \code{mime:::mimeextra});
-note this MIME table takes precedence over the standard table
-\code{\link{mimemap}}}
+\item{mime_extra}{a named character vector of the form \code{c(extension = type)}
+providing extra MIME types (by default, \code{mime:::mimeextra}); note this MIME
+table takes precedence over the standard table \code{\link{mimemap}}}
 
 \item{subtype}{a character vector of MIME subtypes, which should be of the
-same length as \code{file} if provided (use an empty character string for a
-file if we do not want a subtype for it)}
+same length as \code{file} if provided (use an empty character string for a file
+if we do not want a subtype for it)}
 }
 \description{
-Look up in the \code{\link{mimemap}} table for the MIME types based on the
-extensions of the given filenames.
+Look up in the \code{\link{mimemap}} table for the MIME types based on the extensions of
+the given filenames.
 }
 \examples{
 library(mime)

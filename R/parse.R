@@ -13,10 +13,10 @@
 #' @param env the HTTP request environment
 #' @return A named list containing the values of the form data, and the files
 #'   uploaded are saved to temporary files (the temporary filenames are
-#'   returned). It may also be \code{NULL} if there is anything unexpected in
-#'   the form data, or the form is empty.
+#'   returned). It may also be `NULL` if there is anything unexpected in the
+#'   form data, or the form is empty.
 #' @references This function was borrowed from
-#'   \url{https://github.com/jeffreyhorner/Rook/} with slight modifications.
+#'   <https://github.com/jeffreyhorner/Rook/> with slight modifications.
 #' @export
 #' @useDynLib mime, .registration = TRUE
 parse_multipart = function(env) {
