@@ -29,4 +29,6 @@ dump_vec = function(name, x) {
 }
 
 dump_vec('mimemap', lines)
-dump_vec('mimeextra', mimeextra[setdiff(names(mimeextra), names(lines))])
+extra = mimeextra[setdiff(names(mimeextra), names(lines))]
+extra['rd'] = 'text/plain'  # override the rd entry (chemical/x-mdl-rdfile -> text/plain, i.e. R documentation)
+dump_vec('mimeextra', extra)
