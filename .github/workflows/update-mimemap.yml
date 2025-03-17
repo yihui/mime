@@ -1,0 +1,37 @@
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: '5 3 1 * *'
+
+name: Update mimemap
+
+jobs:
+  update-mimemap:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@HEAD
+
+      - uses: r-lib/actions/setup-r@HEAD
+        with:
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@HEAD
+
+      - run: |
+          Rscript tools/update.R
+          OS_INFO=$(uname -sr)
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          title: Update mimemap
+          body: Update mimemap by running `tools/update.R`.
+          commit-message: Update mimemap from ${{ env.OS_INFO }}
+          add-paths: |
+            R/mimemap.R
+            R/mimeextra.R

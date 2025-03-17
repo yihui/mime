@@ -21,7 +21,7 @@ in the table}
 \item{empty}{the MIME type for files that do not have extensions}
 
 \item{mime_extra}{a named character vector of the form \code{c(extension =
-type)} providing extra MIME types (by default, \code{\link{mimeextra}});
+type)} providing extra MIME types (by default, \code{mime:::mimeextra});
 note this MIME table takes precedence over the standard table
 \code{\link{mimemap}}}
 

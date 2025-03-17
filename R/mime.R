@@ -5,11 +5,12 @@ NULL
 #'
 #' The data \code{mimemap} is a named character vector that stores the filename
 #' extensions and the corresponding MIME types, e.g. \code{c(html = 'text/html',
-#' pdf = 'application/pdf', ...)}. The character vector \code{mimeextra} stores
+#' pdf = 'application/pdf', ...)}. The character vector \code{mime:::mimeextra} stores
 #' some additional types that we know, such as Markdown files (\file{.md}), or R
 #' scripts (\file{.R}).
 #' @docType data
-#' @name mimemap
+#' @usage NULL
+#' @format NULL
 #' @source The file \file{/etc/mime.types} on Debian.
 #' @export
 #' @examples str(as.list(mimemap))
@@ -17,60 +18,7 @@ NULL
 #' mimemap[c('html', 'js', 'css')]
 #' # additional MIME types (not exported)
 #' mime:::mimeextra
-local({
-
-  # the code is executed only when called from Rd2roxygen
-  if (!('Rd2roxygen' %in% loadedNamespaces())) return()
-  if (file.access('R/mimemap.R', 2) != 0) return()
-  # do nothing if we are not under *nix; could read Windows registry, but who cares...
-  if (!file.exists(mimefile <- '/etc/mime.types')) return()
-  message('* Updating R/mimemap.R')
-
-  lines = readLines(mimefile, warn = FALSE)
-  # remove comments and blank lines
-  lines = grep('^[a-z]', lines, value = TRUE)
-  lines = unlist(lapply(strsplit(lines, '\\s+'), function(x) {
-    # each line is of the form: type ext [ext2 ext3 ...]
-    if (length(x) <= 1) return()
-    # convert to c(html = 'text/html', js = 'application/javascript', ...)
-    setNames(rep(x[1], length(x) - 1), x[-1])
-  }), recursive = FALSE)
-
-  # remove duplicated file extensions
-  lines = lines[!duplicated(names(lines))]
-  names = names(lines)
-  # write R source code to the data directory; "hand-writing" instead dump(), to
-  # make sure we can easily catch possible future differences in version control
-  writeLines(c(
-    'mimemap = c(',
-    paste(sprintf(
-      '%s = "%s"',
-      # invalid names should be quoted using ``
-      ifelse(make.names(names) == names, names, sprintf('`%s`', names)),
-      lines
-    ), collapse = ',\n'),
-    ')'
-  ), con = 'R/mimemap.R')
-
-})
-
-#' @rdname mimemap
-#' @usage NULL
-#' @format NULL
-mimeextra = c(
-  geojson = "application/vnd.geo+json",
-  gpkg = "application/geopackage+sqlite3",
-  jsonp = "application/javascript",
-  r = "text/plain",
-  rd = "text/plain",
-  rmd = "text/x-markdown",
-  rnw = "text/x-sweave",
-  rproj = "text/rstudio",
-  yml = "text/yaml",
-  scss = "text/css",
-  NULL
-)
-
+'mimemap'
 
 #' Guess the MIME types from filenames
 #'
@@ -81,7 +29,7 @@ mimeextra = c(
 #'   in the table
 #' @param empty the MIME type for files that do not have extensions
 #' @param mime_extra a named character vector of the form \code{c(extension =
-#'   type)} providing extra MIME types (by default, \code{\link{mimeextra}});
+#'   type)} providing extra MIME types (by default, \code{mime:::mimeextra});
 #'   note this MIME table takes precedence over the standard table
 #'   \code{\link{mimemap}}
 #' @param subtype a character vector of MIME subtypes, which should be of the
