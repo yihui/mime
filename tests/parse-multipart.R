@@ -13,8 +13,8 @@ make_rook_input = function(x) {
 }
 
 boundary = '----mime-boundary'
-long_filename_length = 50000
-filename = paste(rep('a', long_filename_length), collapse = '')
+filename_length = 50000
+filename = paste(rep('a', filename_length), collapse = '')
 parts = c(
   sprintf('--%s', boundary),
   sprintf('Content-Disposition: form-data; name="bundle"; filename="%s"', filename),
@@ -43,7 +43,7 @@ res = withCallingHandlers(
 
 if (any(grepl('PCRE error', warnings, fixed = TRUE)))
   stop("Unexpected PCRE warning while parsing multipart payload")
-stopifnot(is.data.frame(res$bundle))
+stopifnot(!is.null(res$bundle), is.data.frame(res$bundle))
 stopifnot(nrow(res$bundle) >= 1L)
 stopifnot(identical(res$bundle$name[[1]], filename))
 stopifnot(identical(rawToChar(readBin(res$bundle$datapath[[1]], 'raw', 1)), 'x'))
