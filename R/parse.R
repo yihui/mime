@@ -107,36 +107,32 @@ parse_multipart = function(env) {
     }
     # cat('Head:',rawToChar(head),'\n') they're 8bit clean
     head = rawToChar(head)
+    headlines = strsplit(head, EOL, fixed = TRUE)[[1L]]
+    # keep empty fallback so malformed/empty headers skip filename parsing safely
+    first_line = if (length(headlines) > 0L) headlines[1L] else ''
     token = '[^\\s()<>,;:\\"\\/\\[\\]?=]+'
-    condisp = sprintf('Content-Disposition:\\s*%s\\s*', token)
-    dispparm = sprintf(';\\s*(%s)=("(?:\\"|[^"])*"|%s)*', token, token)
-    rfc2183 = sprintf('(?m)^%s(%s)+$', condisp, dispparm)
+    condisp = sprintf('^Content-Disposition:\\s*%s\\s*', token)
     broken_quoted = sprintf(
-      '(?m)^%s.*;\\sfilename="(.*?)"(?:\\s*$|\\s*;\\s*%s=)', condisp, token
+      '%s.*;\\sfilename="(.*?)"(?:\\s*$|\\s*;\\s*%s=)', condisp, token
     )
-    broken_unquoted = sprintf('(?m)^%s.*;\\sfilename=(%s)', condisp, token)
-    if (length(grep(rfc2183, head, perl = TRUE))) {
-      first_line = sub(condisp, '', strsplit(head, EOL)[[1L]][1], perl = TRUE)
+    broken_unquoted = sprintf('%s.*;\\sfilename=(%s)', condisp, token)
+    if (length(grep(broken_quoted, first_line, perl = TRUE))) {
+      filename = sub(broken_quoted, '\\1', first_line, perl = TRUE)
+    } else if (length(grep(broken_unquoted, first_line, perl = TRUE))) {
+      filename = sub(broken_unquoted, '\\1', first_line, perl = TRUE)
+    } else if (nzchar(first_line) && length(grep(condisp, first_line, perl = TRUE))) {
+      first_line = sub(condisp, '', first_line, perl = TRUE)
       pairs = strsplit(first_line, ';', fixed = TRUE)[[1L]]
       fnmatch = '\\s*filename=(.*)\\s*'
       if (any(grepl(fnmatch, pairs, perl = TRUE))) {
         filename = pairs[grepl(fnmatch, pairs, perl = TRUE)][1]
         filename = gsub('"', '', sub(fnmatch, '\\1', filename, perl = TRUE))
       }
-    } else if (length(grep(broken_quoted, head, perl = TRUE))) {
-      filename = sub(
-        broken_quoted, '\\1', strsplit(head, '\r\n')[[1L]][1], perl = TRUE
-      )
-    } else if (length(grep(broken_unquoted, head, perl = TRUE))) {
-      filename = sub(
-        broken_unquoted, '\\1', strsplit(head, '\r\n')[[1L]][1], perl = TRUE
-      )
     }
     # TODO: decoding filenames seems to be a mess here; skip it for now
     # if (!is.null(filename) && filename != '') {
     #  filename = unescape(filename)
     # }
-    headlines = strsplit(head, EOL, fixed = TRUE)[[1L]]
     content_type_re = '(?mi)Content-Type: (.*)'
     content_types = grep(content_type_re, headlines, perl = TRUE, value = TRUE)
     if (length(content_types)) {
