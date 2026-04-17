@@ -13,7 +13,8 @@ make_rook_input = function(x) {
 }
 
 boundary = '----mime-boundary'
-filename = paste(rep('a', 50000), collapse = '')
+long_filename_length = 50000
+filename = paste(rep('a', long_filename_length), collapse = '')
 parts = c(
   sprintf('--%s', boundary),
   sprintf('Content-Disposition: form-data; name="bundle"; filename="%s"', filename),
