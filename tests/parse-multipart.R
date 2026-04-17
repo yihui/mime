@@ -40,5 +40,6 @@ res = withCallingHandlers(
   }
 )
 
-stopifnot(!any(grepl('PCRE error', warnings, fixed = TRUE)))
+if (any(grepl('PCRE error', warnings, fixed = TRUE)))
+  stop("Unexpected PCRE warning while parsing multipart payload")
 stopifnot(is.data.frame(res$bundle), identical(res$bundle$name[[1]], filename))

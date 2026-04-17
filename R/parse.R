@@ -108,7 +108,7 @@ parse_multipart = function(env) {
     # cat('Head:',rawToChar(head),'\n') they're 8bit clean
     head = rawToChar(head)
     headlines = strsplit(head, EOL, fixed = TRUE)[[1L]]
-    first_line = headlines[1L]
+    first_line = if (length(headlines)) headlines[1L] else ''
     token = '[^\\s()<>,;:\\"\\/\\[\\]?=]+'
     condisp = sprintf('^Content-Disposition:\\s*%s\\s*', token)
     broken_quoted = sprintf(
