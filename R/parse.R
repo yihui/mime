@@ -108,6 +108,7 @@ parse_multipart = function(env) {
     # cat('Head:',rawToChar(head),'\n') they're 8bit clean
     head = rawToChar(head)
     headlines = strsplit(head, EOL, fixed = TRUE)[[1L]]
+    # keep empty fallback so malformed/empty headers skip filename parsing safely
     first_line = if (length(headlines) > 0L) headlines[1L] else ''
     token = '[^\\s()<>,;:\\"\\/\\[\\]?=]+'
     condisp = sprintf('^Content-Disposition:\\s*%s\\s*', token)

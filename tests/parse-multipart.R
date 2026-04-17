@@ -13,6 +13,7 @@ make_rook_input = function(x) {
 }
 
 boundary = '----mime-boundary'
+# Keep this large enough to exercise the historical PCRE match-limit warning.
 filename_length = 50000
 filename = paste(rep('a', filename_length), collapse = '')
 parts = c(
