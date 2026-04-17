@@ -119,7 +119,7 @@ parse_multipart = function(env) {
       filename = sub(broken_quoted, '\\1', first_line, perl = TRUE)
     } else if (length(grep(broken_unquoted, first_line, perl = TRUE))) {
       filename = sub(broken_unquoted, '\\1', first_line, perl = TRUE)
-    } else if (length(grep(condisp, first_line, perl = TRUE))) {
+    } else if (nzchar(first_line) && length(grep(condisp, first_line, perl = TRUE))) {
       first_line = sub(condisp, '', first_line, perl = TRUE)
       pairs = strsplit(first_line, ';', fixed = TRUE)[[1L]]
       fnmatch = '\\s*filename=(.*)\\s*'

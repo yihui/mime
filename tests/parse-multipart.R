@@ -43,5 +43,7 @@ res = withCallingHandlers(
 
 if (any(grepl('PCRE error', warnings, fixed = TRUE)))
   stop("Unexpected PCRE warning while parsing multipart payload")
-stopifnot(is.data.frame(res$bundle), identical(res$bundle$name[[1]], filename))
+stopifnot(is.data.frame(res$bundle))
+stopifnot(nrow(res$bundle) >= 1L)
+stopifnot(identical(res$bundle$name[[1]], filename))
 stopifnot(identical(rawToChar(readBin(res$bundle$datapath[[1]], 'raw', 1)), 'x'))
