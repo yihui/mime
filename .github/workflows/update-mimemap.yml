@@ -7,6 +7,10 @@ on:
 
 name: Update mimemap
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   update-mimemap:
     runs-on: ubuntu-latest
@@ -20,16 +24,23 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@HEAD
 
-      - run: |
-          Rscript tools/update.R
-          echo "OS_INFO=$(uname -sr)" >> $GITHUB_ENV
+      - run: Rscript tools/update.R
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@HEAD
-        with:
-          title: Update mimemap
-          body: Update mimemap by running `tools/update.R`.
-          commit-message: Update mimemap from ${{ env.OS_INFO }}
-          add-paths: |
-            R/mimemap.R
-            R/mimeextra.R
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet R/mimemap.R R/mimeextra.R; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          branch="update-mimemap"
+          git checkout -b "$branch"
+          git add R/mimemap.R R/mimeextra.R
+          git commit -m "Update mimemap from $(uname -sr)"
+          git push -u origin "$branch" --force
+          if ! gh pr list --head "$branch" --state open | grep -q .; then
+            gh pr create --title "Update mimemap" --body "Update mimemap by running \`tools/update.R\`."
+          fi
