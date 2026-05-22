@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="generator" content="litedown 0.9.9">
+<title>News</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.44/css/default.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.44/css/article.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.44/css/copy-button.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.44/css/heading-anchor.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.44/css/pages.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.44/css/site.min.css">
+</head>
+<body>
+<nav><p><a href="index.html">Home</a>
+<a href="manual.html">Manual</a>
+<a href="news.html">News</a>
+<a href="playground/">Playground</a></p></nav>
+<div class="frontmatter">
+<div class="title"><h1>News</h1></div>
+</div>
+<div class="body">
+<div id="TOC">
+<ul>
+<li><a href="#sec:mime-0-14">mime 0.14</a></li>
+<li><a href="#sec:mime-0-13">mime 0.13</a></li>
+<li><a href="#sec:mime-0-12">mime 0.12</a></li>
+<li><a href="#sec:mime-0-11">mime 0.11</a></li>
+<li><a href="#sec:mime-0-10">mime 0.10</a></li>
+<li><a href="#sec:mime-0-9">mime 0.9</a></li>
+<li><a href="#sec:mime-0-8">mime 0.8</a></li>
+<li><a href="#sec:mime-0-7">mime 0.7</a></li>
+<li><a href="#sec:mime-0-6">mime 0.6</a></li>
+<li><a href="#sec:mime-0-5">mime 0.5</a></li>
+<li><a href="#sec:mime-0-4">mime 0.4</a></li>
+<li><a href="#sec:mime-0-3">mime 0.3</a></li>
+<li><a href="#sec:mime-0-2">mime 0.2</a></li>
+<li><a href="#sec:mime-0-1-2">mime 0.1.2</a></li>
+<li><a href="#sec:mime-0-1-1">mime 0.1.1</a></li>
+<li><a href="#sec:mime-0-1">mime 0.1</a></li>
+</ul>
+</div>
+<h2 id="sec:mime-0-14" class="unnumbered">mime 0.14</h2>
+<h2 id="sec:mime-0-13" class="unnumbered">mime 0.13</h2>
+<ul>
+<li>Synced the MIME types from the latest version of Ubuntu, so that <code>.wasm</code> files can be recognized (thanks, <a href="https://github.com/wch">@wch</a>, <a href="https://github.com/yihui/mime/issues/22">#22</a>).</li>
+</ul>
+<h2 id="sec:mime-0-12" class="unnumbered">mime 0.12</h2>
+<ul>
+<li>Fixed bugs <a href="https://github.com/yihui/mime/issues/15">#15</a> and <a href="https://github.com/yihui/mime/issues/16">#16</a> in <code>parse_multipart()</code> (thanks, <a href="https://github.com/michalkouril">@michalkouril</a>).</li>
+</ul>
+<h2 id="sec:mime-0-11" class="unnumbered">mime 0.11</h2>
+<ul>
+<li>Removed the unused <code>LazyData</code> field in <code>DESCRIPTION</code>.</li>
+</ul>
+<h2 id="sec:mime-0-10" class="unnumbered">mime 0.10</h2>
+<ul>
+<li>Add mimetype for OGC GeoPackage (.gpkg extension) (thanks, <a href="https://github.com/eblondel">@eblondel</a>, <a href="https://github.com/yihui/mime/issues/14">#14</a>).</li>
+</ul>
+<h2 id="sec:mime-0-9" class="unnumbered">mime 0.9</h2>
+<ul>
+<li>Added the MIME type for .jsonp files (thanks, <a href="https://github.com/clabornd">@clabornd</a>, <a href="https://github.com/yihui/mime/issues/11">#11</a>).</li>
+</ul>
+<h2 id="sec:mime-0-8" class="unnumbered">mime 0.8</h2>
+<ul>
+<li>Added the MIME type for .scss files (thanks, <a href="https://github.com/cpsievert">@cpsievert</a>, <a href="https://github.com/yihui/mime/issues/10">#10</a>).</li>
+</ul>
+<h2 id="sec:mime-0-7" class="unnumbered">mime 0.7</h2>
+<ul>
+<li>Added more types for .Rnw, .Rproj, and .yml files (thanks, <a href="https://github.com/beanumber">@beanumber</a>, <a href="https://github.com/yihui/mime/issues/9">#9</a>).</li>
+</ul>
+<h2 id="sec:mime-0-6" class="unnumbered">mime 0.6</h2>
+<ul>
+<li>Updated the MIME types from Ubuntu 18.04.</li>
+</ul>
+<h2 id="sec:mime-0-5" class="unnumbered">mime 0.5</h2>
+<ul>
+<li>the package license was changed from GPL-2 to GPL</li>
+</ul>
+<h2 id="sec:mime-0-4" class="unnumbered">mime 0.4</h2>
+<ul>
+<li>
+<p>added a new content type: .geojson -&gt; application/vnd.geo+json (thanks, <a href="https://github.com/dmpe">@dmpe</a>, <a href="https://github.com/yihui/mime/issues/3">#3</a>)</p>
+</li>
+<li>
+<p>guess_type() may fail on Windows when the file paths are too long (#2)</p>
+</li>
+</ul>
+<h2 id="sec:mime-0-3" class="unnumbered">mime 0.3</h2>
+<ul>
+<li>added a few more content types</li>
+</ul>
+<h2 id="sec:mime-0-2" class="unnumbered">mime 0.2</h2>
+<ul>
+<li>added a function parse_multipart() to parse multipart form data submitted via HTTP POST</li>
+</ul>
+<h2 id="sec:mime-0-1-2" class="unnumbered">mime 0.1.2</h2>
+<ul>
+<li>guess_type() returned wrong values for filenames without extensions: it should have used the ‘empty’ argument.</li>
+</ul>
+<h2 id="sec:mime-0-1-1" class="unnumbered">mime 0.1.1</h2>
+<ul>
+<li>mime::guess_type() may not work when mime is loaded but not attached, because R does not load the mimemap data in this case. Now mimemap is exported in the package namespace.</li>
+</ul>
+<h2 id="sec:mime-0-1" class="unnumbered">mime 0.1</h2>
+<ul>
+<li>The initial version of mime. The main function is mime::guess_type().</li>
+</ul>
+</div>
+<footer><div class="flex-col">
+<p>Developed by <a href="https://yihui.org">Yihui Xie</a></p>
+<p>Site built with <a href="https://github.com/yihui/litedown">litedown</a> v0.9.9</p>
+</div></footer>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.44/js/sidenotes.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.44/js/appendix.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.44/js/toc-highlight.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.44/js/copy-button.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.44/js/heading-anchor.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.44/js/pages.min.js" defer></script>
+</body>
+</html>

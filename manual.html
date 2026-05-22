@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="generator" content="litedown 0.9.9">
+<title>Help pages</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.44/css/default.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.44/css/article.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.44/css/copy-button.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.44/css/heading-anchor.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.44/css/pages.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.44/css/site.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.44/css/prism-xcode.min.css">
+</head>
+<body>
+<nav><p><a href="index.html">Home</a>
+<a href="manual.html">Manual</a>
+<a href="news.html">News</a>
+<a href="playground/">Playground</a></p></nav>
+<div class="frontmatter">
+<div class="title"><h1>Help pages</h1></div>
+</div>
+<div class="body">
+<div id="TOC">
+<ul class="numbered">
+<li><a href="#sec:man-guess_type"><span class="section-number main-number">1</span> Guess the MIME types from filenames</a></li>
+<li><a href="#sec:man-mimemap"><span class="section-number main-number">2</span> Tables for mapping filename extensions to MIME types</a></li>
+<li><a href="#sec:man-parse_multipart"><span class="section-number main-number">3</span> Parse multipart form data</a></li>
+</ul>
+</div>
+<style type="text/css">
+h2 {
+  text-align: center;
+  margin-top: 2em;
+}
+</style>
+<p>
+<b>-- <kbd>G</kbd> --</b>
+<a href="#sec:man-guess_type"><code>guess_type()</code></a>
+</p>
+<p>
+<b>-- <kbd>M</kbd> --</b>
+<a href="#sec:man-mimemap"><code>mimemap</code></a>
+</p>
+<p>
+<b>-- <kbd>P</kbd> --</b>
+<a href="#sec:man-parse_multipart"><code>parse_multipart()</code></a>
+</p>
+<h2 id="sec:man-guess_type"><span class="section-number main-number">1</span> Guess the MIME types from filenames</h2>
+<h3 id="sec:description_1" class="unnumbered unlisted">Description</h3>
+<p>Look up in the <code><a href="#sec:man-mimemap">mimemap</a></code> table for the MIME types based on the extensions of
+the given filenames.
+</p>
+<h3 id="sec:usage_1" class="unnumbered unlisted">Usage</h3>
+<pre><code class="language-r">guess_type(
+  file,
+  unknown = "application/octet-stream",
+  empty = "text/plain",
+  mime_extra = mimeextra,
+  subtype = ""
+)</code></pre>
+<h3 id="sec:arguments_1" class="unnumbered unlisted">Arguments</h3>
+<table role = "presentation">
+<tr><td><code>file</code></td>
+<td>
+<p>a character vector of filenames, or filename extensions</p>
+</td></tr>
+<tr><td><code>unknown</code></td>
+<td>
+<p>the MIME type to return when the file extension was not found
+in the table</p>
+</td></tr>
+<tr><td><code>empty</code></td>
+<td>
+<p>the MIME type for files that do not have extensions</p>
+</td></tr>
+<tr><td><code>mime_extra</code></td>
+<td>
+<p>a named character vector of the form <code>c(extension = type)</code>
+providing extra MIME types (by default, <code>mime:::mimeextra</code>); note this MIME
+table takes precedence over the standard table <code><a href="#sec:man-mimemap">mimemap</a></code></p>
+</td></tr>
+<tr><td><code>subtype</code></td>
+<td>
+<p>a character vector of MIME subtypes, which should be of the
+same length as <code>file</code> if provided (use an empty character string for a file
+if we do not want a subtype for it)</p>
+</td></tr>
+</table>
+<h3 id="sec:examples_1" class="unnumbered unlisted">Examples</h3>
+<pre><code class="language-r">library(mime)
+# well-known file types
+guess_type(c(&quot;a/b/c.html&quot;, &quot;d.pdf&quot;, &quot;e.odt&quot;, &quot;foo.docx&quot;, &quot;tex&quot;))
+</code></pre>
+<pre><code>#&gt; [1] &quot;text/html&quot;                                                              
+#&gt; [2] &quot;application/pdf&quot;                                                        
+#&gt; [3] &quot;application/vnd.oasis.opendocument.text&quot;                                
+#&gt; [4] &quot;application/vnd.openxmlformats-officedocument.wordprocessingml.document&quot;
+#&gt; [5] &quot;text/plain&quot;                                                             
+</code></pre>
+<pre><code class="language-r"># not in the standard table, but in mimeextra
+guess_type(c(&quot;a.md&quot;, &quot;b.R&quot;), mime_extra = NULL)
+</code></pre>
+<pre><code>#&gt; [1] &quot;text/markdown&quot;            &quot;application/octet-stream&quot;
+</code></pre>
+<pre><code class="language-r">guess_type(c(&quot;a.md&quot;, &quot;b.R&quot;))
+</code></pre>
+<pre><code>#&gt; [1] &quot;text/markdown&quot; &quot;text/plain&quot;   
+</code></pre>
+<pre><code class="language-r"># override the standard MIME table (tex is text/x-tex by default)
+guess_type(&quot;tex&quot;, mime_extra = c(tex = &quot;text/plain&quot;))
+</code></pre>
+<pre><code>#&gt; [1] &quot;text/plain&quot;
+</code></pre>
+<pre><code class="language-r"># unknown extension 'zzz'
+guess_type(&quot;foo.zzz&quot;)
+</code></pre>
+<pre><code>#&gt; [1] &quot;application/octet-stream&quot;
+</code></pre>
+<pre><code class="language-r"># force unknown types to be plain text
+guess_type(&quot;foo.zzz&quot;, unknown = &quot;text/plain&quot;)
+</code></pre>
+<pre><code>#&gt; [1] &quot;text/plain&quot;
+</code></pre>
+<pre><code class="language-r"># empty file extension
+guess_type(&quot;Makefile&quot;)
+</code></pre>
+<pre><code>#&gt; [1] &quot;text/plain&quot;
+</code></pre>
+<pre><code class="language-r"># we know it is a plain text file
+guess_type(&quot;Makefile&quot;, empty = &quot;text/plain&quot;)
+</code></pre>
+<pre><code>#&gt; [1] &quot;text/plain&quot;
+</code></pre>
+<pre><code class="language-r"># subtypes
+guess_type(c(&quot;abc.html&quot;, &quot;def.htm&quot;), subtype = c(&quot;charset=UTF-8&quot;, &quot;&quot;))
+</code></pre>
+<pre><code>#&gt; [1] &quot;text/html; charset=UTF-8&quot; &quot;text/html&quot;               
+</code></pre>
+<h2 id="sec:man-mimemap"><span class="section-number main-number">2</span> Tables for mapping filename extensions to MIME types</h2>
+<h3 id="sec:description_2" class="unnumbered unlisted">Description</h3>
+<p>The data <code>mimemap</code> is a named character vector that stores the filename
+extensions and the corresponding MIME types, e.g. <code>c(html = 'text/html', pdf = 'application/pdf', ...)</code>. The character vector <code>mime:::mimeextra</code> stores
+some additional types that we know, such as Markdown files (<code>.md</code>), or R
+scripts (<code>.R</code>).
+</p>
+<h3 id="sec:source" class="unnumbered unlisted">Source</h3>
+<p>The file <code>/etc/mime.types</code> on Debian.
+</p>
+<h3 id="sec:examples_2" class="unnumbered unlisted">Examples</h3>
+<pre><code class="language-r">str(as.list(mimemap))
+</code></pre>
+<pre><code>#&gt; List of 1548
+#&gt;  $ %                             : chr &quot;application/x-trash&quot;
+#&gt;  $ ~                             : chr &quot;application/x-trash&quot;
+#&gt;  $ 123                           : chr &quot;application/vnd.lotus-1-2-3&quot;
+#&gt;  $ 1905.1                        : chr &quot;application/vnd.ieee.1905&quot;
+#&gt;  $ 1clr                          : chr &quot;application/clr&quot;
+#&gt;  $ 1km                           : chr &quot;application/vnd.1000minds.decision-model+xml&quot;
+#&gt;  $ 210                           : chr &quot;application/p21&quot;
+#&gt;  $ 3dm                           : chr &quot;text/vnd.in3d.3dml&quot;
+#&gt;  $ 3dml                          : chr &quot;text/vnd.in3d.3dml&quot;
+#&gt;  $ 3mf                           : chr &quot;application/vnd.ms-3mfdocument&quot;
+#&gt;  $ 3tz                           : chr &quot;application/vnd.maxar.archive.3tz+zip&quot;
+#&gt;  $ 726                           : chr &quot;audio/32kadpcm&quot;
+#&gt;  $ 7z                            : chr &quot;application/x-7z-compressed&quot;
+#&gt;  $ a                             : chr &quot;text/vnd.a&quot;
+#&gt;  $ a2l                           : chr &quot;application/A2L&quot;
+#&gt;  $ aa3                           : chr &quot;audio/ATRAC3&quot;
+#&gt;  $ aac                           : chr &quot;audio/aac&quot;
+#&gt;  $ aal                           : chr &quot;audio/ATRAC-ADVANCED-LOSSLESS&quot;
+#&gt;  $ abc                           : chr &quot;text/vnd.abc&quot;
+#&gt;  $ abw                           : chr &quot;application/x-abiword&quot;
+#&gt;  $ ac                            : chr &quot;application/pkix-attr-cert&quot;
+#&gt;  $ ac2                           : chr &quot;application/vnd.banana-accounting&quot;
+#&gt;  $ ac3                           : chr &quot;audio/ac3&quot;
+#&gt;  $ acc                           : chr &quot;application/vnd.americandynamics.acc&quot;
+#&gt;  $ acn                           : chr &quot;audio/asc&quot;
+#&gt;  $ acu                           : chr &quot;application/vnd.acucobol&quot;
+#&gt;  $ acutc                         : chr &quot;application/vnd.acucorp&quot;
+#&gt;  $ adts                          : chr &quot;audio/aac&quot;
+#&gt;  $ aep                           : chr &quot;application/vnd.audiograph&quot;
+#&gt;  $ afp                           : chr &quot;application/vnd.afpc.modca&quot;
+#&gt;  $ age                           : chr &quot;application/vnd.age&quot;
+#&gt;  $ ahead                         : chr &quot;application/vnd.ahead.space&quot;
+#&gt;  $ ai                            : chr &quot;application/postscript&quot;
+#&gt;  $ aif                           : chr &quot;audio/x-aiff&quot;
+#&gt;  $ aifc                          : chr &quot;audio/x-aiff&quot;
+#&gt;  $ aiff                          : chr &quot;audio/x-aiff&quot;
+#&gt;  $ aion                          : chr &quot;application/vnd.veritone.aion+json&quot;
+#&gt;  $ ait                           : chr &quot;application/vnd.dvb.ait&quot;
+#&gt;  $ alc                           : chr &quot;chemical/x-alchemy&quot;
+#&gt;  $ ami                           : chr &quot;application/vnd.amiga.ami&quot;
+#&gt;  $ aml                           : chr &quot;application/AML&quot;
+#&gt;  $ amlx                          : chr &quot;application/automationml-amlx+zip&quot;
+#&gt;  $ amr                           : chr &quot;audio/AMR&quot;
+#&gt;  $ AMR                           : chr &quot;audio/AMR&quot;
+#&gt;  $ anx                           : chr &quot;application/annodex&quot;
+#&gt;  $ apex                          : chr &quot;application/vnd.apexlang&quot;
+#&gt;  $ apexlang                      : chr &quot;application/vnd.apexlang&quot;
+#&gt;  $ apk                           : chr &quot;application/vnd.android.package-archive&quot;
+#&gt;  $ apkg                          : chr &quot;application/vnd.anki&quot;
+#&gt;  $ apng                          : chr &quot;image/apng&quot;
+#&gt;  $ appcache                      : chr &quot;text/cache-manifest&quot;
+#&gt;  $ apr                           : chr &quot;application/vnd.lotus-approach&quot;
+#&gt;  $ apxml                         : chr &quot;application/auth-policy+xml&quot;
+#&gt;  $ arrow                         : chr &quot;application/vnd.apache.arrow.file&quot;
+#&gt;  $ arrows                        : chr &quot;application/vnd.apache.arrow.stream&quot;
+#&gt;  $ art                           : chr &quot;image/x-jg&quot;
+#&gt;  $ artisan                       : chr &quot;application/vnd.artisan+json&quot;
+#&gt;  $ asc                           : chr &quot;application/pgp-keys&quot;
+#&gt;  $ ascii                         : chr &quot;text/vnd.ascii-art&quot;
+#&gt;  $ asf                           : chr &quot;application/vnd.ms-asf&quot;
+#&gt;  $ asice                         : chr &quot;application/vnd.etsi.asic-e+zip&quot;
+#&gt;  $ asics                         : chr &quot;application/vnd.etsi.asic-s+zip&quot;
+#&gt;  $ asn                           : chr &quot;chemical/x-ncbi-asn1&quot;
+#&gt;  $ aso                           : chr &quot;application/vnd.accpac.simply.aso&quot;
+#&gt;  $ ass                           : chr &quot;audio/aac&quot;
+#&gt;  $ at3                           : chr &quot;audio/ATRAC3&quot;
+#&gt;  $ atc                           : chr &quot;application/vnd.acucorp&quot;
+#&gt;  $ atf                           : chr &quot;application/ATF&quot;
+#&gt;  $ atfx                          : chr &quot;application/ATFX&quot;
+#&gt;  $ atom                          : chr &quot;application/atom+xml&quot;
+#&gt;  $ atomcat                       : chr &quot;application/atomcat+xml&quot;
+#&gt;  $ atomdeleted                   : chr &quot;application/atomdeleted+xml&quot;
+#&gt;  $ atomsrv                       : chr &quot;application/atomserv+xml&quot;
+#&gt;  $ atomsvc                       : chr &quot;application/atomsvc+xml&quot;
+#&gt;  $ atx                           : chr &quot;audio/ATRAC-X&quot;
+#&gt;  $ atxml                         : chr &quot;application/ATXML&quot;
+#&gt;  $ au                            : chr &quot;audio/basic&quot;
+#&gt;  $ auc                           : chr &quot;application/tamp-apex-update-confirm&quot;
+#&gt;  $ avci                          : chr &quot;image/avci&quot;
+#&gt;  $ avcs                          : chr &quot;image/avcs&quot;
+#&gt;  $ avi                           : chr &quot;video/x-msvideo&quot;
+#&gt;  $ avif                          : chr &quot;image/avif&quot;
+#&gt;  $ awb                           : chr &quot;audio/AMR-WB&quot;
+#&gt;  $ AWB                           : chr &quot;audio/AMR-WB&quot;
+#&gt;  $ axa                           : chr &quot;audio/annodex&quot;
+#&gt;  $ axv                           : chr &quot;video/annodex&quot;
+#&gt;  $ azf                           : chr &quot;application/vnd.airzip.filesecure.azf&quot;
+#&gt;  $ azs                           : chr &quot;application/vnd.airzip.filesecure.azs&quot;
+#&gt;  $ azv                           : chr &quot;image/vnd.airzip.accelerator.azv&quot;
+#&gt;  $ azw3                          : chr &quot;application/vnd.amazon.mobi8-ebook&quot;
+#&gt;  $ b                             : chr &quot;chemical/x-molconn-Z&quot;
+#&gt;  $ b16                           : chr &quot;image/vnd.pco.b16&quot;
+#&gt;  $ bak                           : chr &quot;application/x-trash&quot;
+#&gt;  $ bar                           : chr &quot;application/vnd.qualcomm.brew-app-res&quot;
+#&gt;  $ bary                          : chr &quot;model/vnd.bary&quot;
+#&gt;  $ bat                           : chr &quot;application/x-msdos-program&quot;
+#&gt;  $ bcpio                         : chr &quot;application/x-bcpio&quot;
+#&gt;  $ bdm                           : chr &quot;application/vnd.syncml.dm+wbxml&quot;
+#&gt;  $ bed                           : chr &quot;application/vnd.realvnc.bed&quot;
+#&gt;   [list output truncated]
+</code></pre>
+<pre><code class="language-r">mimemap[&quot;pdf&quot;]
+</code></pre>
+<pre><code>#&gt;               pdf 
+#&gt; &quot;application/pdf&quot; 
+</code></pre>
+<pre><code class="language-r">mimemap[c(&quot;html&quot;, &quot;js&quot;, &quot;css&quot;)]
+</code></pre>
+<pre><code>#&gt;              html                js               css 
+#&gt;       &quot;text/html&quot; &quot;text/javascript&quot;        &quot;text/css&quot; 
+</code></pre>
+<pre><code class="language-r"># additional MIME types (not exported)
+mime:::mimeextra
+</code></pre>
+<pre><code>#&gt;                    jsonp                        r                       rd 
+#&gt; &quot;application/javascript&quot;             &quot;text/plain&quot;             &quot;text/plain&quot; 
+#&gt;                      rmd                      rnw                    rproj 
+#&gt;        &quot;text/x-markdown&quot;          &quot;text/x-sweave&quot;           &quot;text/rstudio&quot; 
+#&gt;                     scss 
+#&gt;               &quot;text/css&quot; 
+</code></pre>
+<h2 id="sec:man-parse_multipart"><span class="section-number main-number">3</span> Parse multipart form data</h2>
+<h3 id="sec:description_3" class="unnumbered unlisted">Description</h3>
+<p>This function parses the HTML form data from a Rook environment (an HTTP POST
+request).
+</p>
+<h3 id="sec:usage_2" class="unnumbered unlisted">Usage</h3>
+<pre><code class="language-r">parse_multipart(env)</code></pre>
+<h3 id="sec:arguments_2" class="unnumbered unlisted">Arguments</h3>
+<table role = "presentation">
+<tr><td><code>env</code></td>
+<td>
+<p>the HTTP request environment</p>
+</td></tr>
+</table>
+<h3 id="sec:value" class="unnumbered unlisted">Value</h3>
+<p>A named list containing the values of the form data, and the files
+uploaded are saved to temporary files (the temporary filenames are
+returned). It may also be <code>NULL</code> if there is anything unexpected in the
+form data, or the form is empty.
+</p>
+<h3 id="sec:references" class="unnumbered unlisted">References</h3>
+<p>This function was borrowed from
+<a href="https://github.com/jeffreyhorner/Rook/">https://github.com/jeffreyhorner/Rook/</a> with slight modifications.
+</p>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.44/css/manual.min.css">
+</div>
+<footer><div class="flex-col">
+<p>Developed by <a href="https://yihui.org">Yihui Xie</a></p>
+<p>Site built with <a href="https://github.com/yihui/litedown">litedown</a> v0.9.9</p>
+</div></footer>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.44/js/sidenotes.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.44/js/appendix.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.44/js/toc-highlight.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.44/js/copy-button.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.44/js/heading-anchor.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.44/js/pages.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js" defer></script>
+</body>
+</html>
