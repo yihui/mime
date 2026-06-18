@@ -17,6 +17,19 @@ jobs:
 
     steps:
       - uses: actions/checkout@HEAD
+        with:
+          fetch-depth: 0
+
+      - name: Keep schedule alive via flip-flop tag
+        run: |
+          TAG=keep-alive
+          if git tag -l | grep -q "^$TAG$"; then
+            git tag -d "$TAG"
+            git push origin :refs/tags/"$TAG"
+          else
+            git tag "$TAG"
+            git push origin "$TAG"
+          fi
 
       - uses: r-lib/actions/setup-r@HEAD
         with:
