@@ -5,6 +5,7 @@
 [![R-CMD-check](https://github.com/yihui/mime/workflows/R-CMD-check/badge.svg)](https://github.com/yihui/mime/actions)
 [![CRAN
 release](https://www.r-pkg.org/badges/version/mime)](https://cran.r-project.org/package=mime)
+[![Build site](https://github.com/yihui/mime/actions/workflows/litedown-site.yml/badge.svg)](https://github.com/yihui/mime/actions/workflows/litedown-site.yml)
 
 <!-- badges: end -->
 
